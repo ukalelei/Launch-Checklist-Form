@@ -1,5 +1,9 @@
 // Write your JavaScript code here!
 
+function formClicked(event){
+   event.preventDefault();
+}
+
 
 let formSubmitButton = document.getElementById("formSubmit");
 formSubmitButton.addEventListener("click", formClicked);
