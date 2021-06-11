@@ -1,11 +1,25 @@
 // Write your JavaScript code here!
 
-function formSubmit(event){
-   event.preventDefault();
-}
 
-let form = document.getElementById("launchForm");
-formSubmitButton.addEventListener("submit", formSubmit);
+window.addEventListener("load", function(){
+   let form = document.getElementById("launchForm");
+   let pilotInput = document.getElementById("pilotName");
+   let coPilotInput = document.getElementById("copilotName");
+   let fuelLevelInput = document.getElementById("fuelLevel");
+   let cargoMassInput = document.getElementById("cargoMass");
+   
+   function formSubmit(event){
+      if (pilotInput.value === "" || coPilotInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === ""){
+         event.preventDefault();
+         alert("All fields are required!");
+      }
+   }
+
+   form.addEventListener("submit", formSubmit);
+   
+});
+
+
 
 
 
