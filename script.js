@@ -13,6 +13,7 @@ window.addEventListener("load", function(){
    let copilotStatus = document.getElementById("copilotStatus");
    let fuelStatus = document.getElementById("fuelStatus");
    let cargoStatus = document.getElementById("cargoStatus");
+   let planets = "https://handlers.education.launchcode.org/static/planets.json";
    
    function formSubmit(event){
       event.preventDefault();
@@ -26,20 +27,40 @@ window.addEventListener("load", function(){
          copilotStatus.innerHTML = `${coPilotInput.value} Ready`;
          readyOrNot();
       }
-
+      
       function readyOrNot(){
          if (fuelLevelInput.value < 10000 || cargoMassInput.value > 10000){
             launchStatus.innerHTML = "Shuttle not ready for launch.";
             launchStatus.style.color ="red";
-            }if (cargoMassInput.value > 10000){
-               cargoStatus.innerHTML =  "There is too much mass for the shuttle to take off."
-            }else if (fuelLevelInput.value < 10000){
-               fuelStatus.innerHTML =  "There is not enough fuel for the journey.";
-            }else{
-               launchStatus.style.color ="green";
-               launchStatus.innerHTML = "Shuttle is ready for launch.";
-            }
-         }
+         }if (cargoMassInput.value > 10000){
+            cargoStatus.innerHTML =  "There is too much mass for the shuttle to take off."
+         }else if (fuelLevelInput.value < 10000){
+            fuelStatus.innerHTML =  "There is not enough fuel for the journey.";
+         }else{
+            launchStatus.style.color ="green";
+            launchStatus.innerHTML = "Shuttle is ready for launch.";
+            tatooine();
+          }
+      }
+
+      function tatooine(){ 
+         fetch(planets).then(function (response){
+            response.json().then(function(json){
+               let destination = document.getElementById("missionTarget");
+               destination.innerHTML = `
+                  <h2>Mission Destination</h2>
+                  <ol>
+                     <li>Name: ${json[0].name}</li>
+                     <li>Diameter: ${json[0].diameter} km</li>
+                     <li>Star: ${json[0].star}</li>
+                     <li>Distance from Earth: ${json[0].distance}</li>
+                     <li>Number of Moons: ${json[0].moons}</li>
+                  </ol>
+                  <img src="${json[0].image}">
+               `;
+            });
+         });
+      }
    }
 
 
@@ -62,5 +83,5 @@ window.addEventListener("load", function(){
    <li>Distance from Earth: ${}</li>
    <li>Number of Moons: ${}</li>
 </ol>
-<img src="${}">
+<img src="${JSON}">
 */
