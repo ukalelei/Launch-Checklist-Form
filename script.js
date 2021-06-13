@@ -7,7 +7,7 @@ window.addEventListener("load", function(){
    let coPilotInput = document.getElementById("copilotName");
    let fuelLevelInput = document.getElementById("fuelLevel");
    let cargoMassInput = document.getElementById("cargoMass");
-   let launchStatus = document.getElementById("launchStatus");
+   let launchStatus = document.getElementById("launchStatus"); 
    let faultyItems = document.getElementById("faultyItems");
    let pilotStatus = document.getElementById("pilotStatus");
    let copilotStatus = document.getElementById("copilotStatus");
@@ -39,49 +39,32 @@ window.addEventListener("load", function(){
          }else{
             launchStatus.style.color ="green";
             launchStatus.innerHTML = "Shuttle is ready for launch.";
-            tatooine();
+            randomPlanet();
           }
       }
 
-      function tatooine(){ 
+
+      function randomPlanet(){ 
          fetch(planets).then(function (response){
             response.json().then(function(json){
+               let randomIndex = Math.floor(Math.random()*json.length)
                let destination = document.getElementById("missionTarget");
                destination.innerHTML = `
                   <h2>Mission Destination</h2>
                   <ol>
-                     <li>Name: ${json[0].name}</li>
-                     <li>Diameter: ${json[0].diameter} km</li>
-                     <li>Star: ${json[0].star}</li>
-                     <li>Distance from Earth: ${json[0].distance}</li>
-                     <li>Number of Moons: ${json[0].moons}</li>
+                     <li>Name: ${json[randomIndex].name}</li>
+                     <li>Diameter: ${json[randomIndex].diameter} km</li>
+                     <li>Star: ${json[randomIndex].star}</li>
+                     <li>Distance from Earth: ${json[randomIndex].distance}</li>
+                     <li>Number of Moons: ${json[randomIndex].moons}</li>
                   </ol>
-                  <img src="${json[0].image}">
+                  <img src="${json[randomIndex].image}">
                `;
             });
          });
       }
    }
 
-
-
    form.addEventListener("submit", formSubmit);
 });
 
-
-
-
-
-
-
-/* This block of code shows how to format the HTML once you fetch some planetary JSON!
-<h2>Mission Destination</h2>
-<ol>
-   <li>Name: ${}</li>
-   <li>Diameter: ${}</li>
-   <li>Star: ${}</li>
-   <li>Distance from Earth: ${}</li>
-   <li>Number of Moons: ${}</li>
-</ol>
-<img src="${JSON}">
-*/
