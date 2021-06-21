@@ -21,6 +21,8 @@ window.addEventListener("load", function(){
          alert("All fields are required!");
       }else if (isNaN(fuelLevelInput.value) || isNaN(cargoMassInput.value)){
          alert("Fuel level and cargo mass must be numbers!");
+      }else if (!isNaN(pilotInput.value) || !isNaN(coPilotInput.value)){
+         alert("Pilot name and co-pilot name must contain at least one letter!");
       }else{
          faultyItems.style.visibility = "visible";
          pilotStatus.innerHTML = `${pilotInput.value} Ready`;
