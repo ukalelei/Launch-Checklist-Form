@@ -15,6 +15,9 @@ window.addEventListener("load", function(){
    let cargoStatus = document.getElementById("cargoStatus");
    let planets = "https://handlers.education.launchcode.org/static/planets.json";
    
+   randomPlanet();
+
+   
    function formSubmit(event){
       event.preventDefault();
       if (pilotInput.value === "" || coPilotInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === ""){
@@ -41,30 +44,28 @@ window.addEventListener("load", function(){
          }else{
             launchStatus.style.color ="green";
             launchStatus.innerHTML = "Shuttle is ready for launch.";
-            randomPlanet();
-          }
+         }
       }
-
-
-      function randomPlanet(){ 
-         fetch(planets).then(function (response){
-            response.json().then(function(json){
-               let randomIndex = Math.floor(Math.random()*json.length)
-               let destination = document.getElementById("missionTarget");
-               destination.innerHTML = `
-                  <h2>Mission Destination</h2>
-                  <ol>
-                     <li>Name: ${json[randomIndex].name}</li>
-                     <li>Diameter: ${json[randomIndex].diameter} km</li>
-                     <li>Star: ${json[randomIndex].star}</li>
-                     <li>Distance from Earth: ${json[randomIndex].distance}</li>
-                     <li>Number of Moons: ${json[randomIndex].moons}</li>
-                  </ol>
-                  <img src="${json[randomIndex].image}">
-               `;
-            });
+   }
+   
+   function randomPlanet(){ 
+      fetch(planets).then(function (response){
+         response.json().then(function(json){
+            let randomIndex = Math.floor(Math.random()*json.length)
+            let destination = document.getElementById("missionTarget");
+            destination.innerHTML = `
+               <h2>Mission Destination</h2>
+               <ol>
+                  <li>Name: ${json[randomIndex].name}</li>
+                  <li>Diameter: ${json[randomIndex].diameter} km</li>
+                  <li>Star: ${json[randomIndex].star}</li>
+                  <li>Distance from Earth: ${json[randomIndex].distance}</li>
+                  <li>Number of Moons: ${json[randomIndex].moons}</li>
+               </ol>
+               <img src="${json[randomIndex].image}">
+            `;
          });
-      }
+      });
    }
 
    form.addEventListener("submit", formSubmit);
