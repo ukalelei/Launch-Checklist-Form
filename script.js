@@ -17,7 +17,6 @@ window.addEventListener("load", function(){
    
    randomPlanet();
 
-   
    function formSubmit(event){
       event.preventDefault();
       if (pilotInput.value === "" || coPilotInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === ""){
@@ -47,7 +46,7 @@ window.addEventListener("load", function(){
          }
       }
    }
-   
+
    function randomPlanet(){ 
       fetch(planets).then(function (response){
          response.json().then(function(json){
